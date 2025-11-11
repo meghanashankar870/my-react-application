@@ -1,5 +1,6 @@
 import { useState } from "react";//it brings in the power of state management in your React component.
 import "./gpf.css";
+import { motion } from "framer-motion";
 
 export default function GitHubProfileFinder() {
   const [username, setUsername] = useState("");//Stores text from the input box
@@ -11,7 +12,8 @@ export default function GitHubProfileFinder() {
   //This is an arrow function declared inside your component.
   //It’s marked as async, meaning it will use await to handle asynchronous code (like API requests) cleanly.
   const getProfile = async () => {
-    //trim()=>remove extra spaces
+    //trim(" ABC ")=>becomes "ABC" means remove extra spaces
+    //!("ABC") → false and !("") → true
     if (!username.trim()) {
       setError("Please enter a username.");
       return;
@@ -65,9 +67,10 @@ export default function GitHubProfileFinder() {
           type="text"
           placeholder="Enter GitHub username..."
           value={username}
-          //onchnage updates state with every keystroke
+          //onchnage -- updates state with every keystroke
           onChange={(e) => setUsername(e.target.value)}
-        />
+          onKeyDown={(e) => e.key === "Enter" && getProfile()}
+       />
         {/*button runs getprofile() when clicked*/}
         <button onClick={getProfile}>Search</button>
       </div>{/*This is called two-way binding — input and state reflect each other.*/}
@@ -80,7 +83,12 @@ export default function GitHubProfileFinder() {
         Displays image, name, bio, followers, and profile link.
         Uses logical OR (||) to handle missing data gracefully*/}
       {profile && (
-        <div id="profile">
+        <motion.div
+        id="profile"
+        initial={{ opacity: 0, y: -20 }}//Starts slightly above (and invisible)
+        animate={{ opacity: 1, y: 0 }} //Moves into place & fades in
+        //Animation takes 0.5 seconds
+        transition={{ duration: 0.5 }}> 
           <img
             src={profile.avatar_url}
             alt="Profile"
@@ -92,10 +100,15 @@ export default function GitHubProfileFinder() {
             Followers: {profile.followers} | Following: {profile.following}
           </p>
           <p>Public Repos: {profile.public_repos}</p>
+          <p>Location: {profile.location || "Not available"}</p>
+          <p>Company: {profile.company || "Not available"}</p>
+          <p>Twitter: {profile.twitter_username || "N/A"}</p>
+          <p>Joined: {new Date(profile.created_at).toLocaleDateString()}</p>
+
           <a href={profile.html_url} target="_blank">
             View GitHub Profile
           </a>
-        </div>
+    </motion.div>
       )}
 
       {/*conditional rendering*/}

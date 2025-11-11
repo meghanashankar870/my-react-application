@@ -50,7 +50,16 @@ button:hover {
   transform: scale(1.05);
 }
 #profile {
-  margin-top: 20px;
+  background-color: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  transition: transform 0.3s ease;
+}
+
+#profile:hover {
+  transform: scale(1.03);
 }
 
 #repos {
