@@ -87,7 +87,7 @@ export default function GitHubProfileFinder() {
         id="profile"
         initial={{ opacity: 0, y: -20 }}//Starts slightly above (and invisible)
         animate={{ opacity: 1, y: 0 }} //Moves into place & fades in
-        //Animation takes 0.5 seconds
+        //Animation takes 0.5 seconds 
         transition={{ duration: 0.5 }}> 
           <img
             src={profile.avatar_url}
