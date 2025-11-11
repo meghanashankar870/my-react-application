@@ -1,0 +1,79 @@
+body {
+  background-color: #0d1117;
+  color: #c9d1d9;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.container {
+  text-align: center;
+  background-color: #161b22;
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.search-box {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+input {
+  padding: 10px;
+  width: 70%;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+}
+
+button {
+  padding: 10px 15px;
+  background-color: #bbd8c1;
+  border: none;
+  border-radius: 6px;
+  color: black;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #2ea043;
+  transform: scale(1.05);
+}
+#profile {
+  margin-top: 20px;
+}
+
+#repos {
+  margin-top: 15px;
+  text-align: left;
+}
+
+.repo {
+  background-color: #21262d;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.repo a {
+  color: #58a6ff;
+  text-decoration: none;
+}
+
+.repo a:hover {
+  text-decoration: underline;
+}
+
+.hidden {
+  display: none;
+}
