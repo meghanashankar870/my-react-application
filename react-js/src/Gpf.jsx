@@ -39,7 +39,7 @@ export default function GitHubProfileFinder() {
         return;
       }
 
-      setProfile(data);
+      setProfile(data);//store profile data
       //another Api call to get the user's latest repositories
       const repoResponse = await fetch(
         `https://api.github.com/users/${username}/repos?sort=updated&per_page=5`
@@ -50,7 +50,7 @@ export default function GitHubProfileFinder() {
       console.error("Error fetching profile:", error);
       setError("Something went wrong. Try again later.");
     } finally {
-      setLoading(false);//always stops loading
+      setLoading(false);//runs no matter what--hides the loading spinner
     }
   };
 
@@ -65,14 +65,20 @@ export default function GitHubProfileFinder() {
           type="text"
           placeholder="Enter GitHub username..."
           value={username}
+          //onchnage updates state with every keystroke
           onChange={(e) => setUsername(e.target.value)}
         />
+        {/*button runs getprofile() when clicked*/}
         <button onClick={getProfile}>Search</button>
-      </div>
+      </div>{/*This is called two-way binding — input and state reflect each other.*/}
 
+      {/*If loading is true → shows “Loading…”If error has text → shows it in red.*/}
       {loading && <div id="loader">Loading...</div>}
       {error && <p style={{ color: "red" }}>{error}</p>}
-
+    
+      {/*Only runs if profile is not null (i.e., data was fetched).
+        Displays image, name, bio, followers, and profile link.
+        Uses logical OR (||) to handle missing data gracefully*/}
       {profile && (
         <div id="profile">
           <img
@@ -92,11 +98,13 @@ export default function GitHubProfileFinder() {
         </div>
       )}
 
+      {/*conditional rendering*/}
       {repos.length > 0 && (
         <div id="repos">
           <h3>Latest Repositories:</h3>
+          {/*.map() loops through each repo object and renders it */}
           {repos.map((repo) => (
-            <div key={repo.id} className="repo">
+            <div key={repo.id} className="repo">{/*key=[repo.id] helps react efficiently track list items*/}
               <a href={repo.html_url} target="_blank">
                 {repo.name}
               </a>
