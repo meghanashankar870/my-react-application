@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from "react";//it brings in the power of state management in your React component.
 import "./gpf.css";
 
 export default function GitHubProfileFinder() {
